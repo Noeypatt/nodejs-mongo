@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { create, read, update } = require('../controllers/cats')
+const { create, read, update, remove } = require('../controllers/cats')
 
 router
     .get('/', function (req, res) {
@@ -9,5 +9,6 @@ router
     .get('/cats', read)
     .post('/create-cat', create)
     .put('/update-cat/:name', update)
+    .delete('/remove-cat/:name', remove)
 
 module.exports = router

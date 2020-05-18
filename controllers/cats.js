@@ -13,11 +13,11 @@ exports.create = function (req, res) {
     cat.save(function (err) {
         if (err) {
             return res.json({
-                error: 'Cat Created Wrong'
+                error: 'Created Wrong'
             })
         }
         res.json({
-            message: 'Cat Created successfully'
+            message: 'Created Successfully'
         })
     })
 }
@@ -27,12 +27,11 @@ exports.read = function (req, res) {
         .exec((err, cats) => {
             if (err) {
                 return res.json({
-                    error: 'Cats not found'
+                    error: 'Not found'
                 })
             }
             res.send(cats)
         })
-
 }
 
 exports.update = function (req, res) {
@@ -44,14 +43,32 @@ exports.update = function (req, res) {
         { $set: req.body },
         function (err, cats) {
             if (err) {
+                res.json({
+                    error: 'Not found'
+                })
                 console.log(err);
             }
             else {
                 res.json({
-                    message: `User updated`
+                    message: `Updated Successfully`
                 })
             }
         }
     )
+}
+
+exports.remove = function (req, res) {
+    const name = req.params.name
+    Cats.findOneAndDelete(name,
+        function (err) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.json({
+                    message: `Delete Successfully`
+                })
+            }
+        })
 
 }
