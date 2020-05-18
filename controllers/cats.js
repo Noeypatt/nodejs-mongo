@@ -38,8 +38,7 @@ exports.update = function (req, res) {
 
     const name = req.params.name
 
-    console.log(name);
-    Cats.findOneAndUpdate(name,
+    Cats.findOneAndUpdate({ name: name },
         { $set: req.body },
         function (err, cats) {
             if (err) {
@@ -59,7 +58,8 @@ exports.update = function (req, res) {
 
 exports.remove = function (req, res) {
     const name = req.params.name
-    Cats.findOneAndDelete(name,
+
+    Cats.findOneAndRemove({ name: name },
         function (err) {
             if (err) {
                 console.log(err);
