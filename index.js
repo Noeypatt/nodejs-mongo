@@ -1,12 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const app = express()
 require('dotenv').config()
-import catsRouter from './routes/cats'
+const catsRouter = require('./routes/cats')
+
 
 const PORT = process.env.PORT || 8000
-const dbHost = process.env.DATABASE_HOST || "mongodb://localhost:27017/users"
-const dbName = process.env.DATABASE_NAME || "users"
+const dbHost = process.env.DATABASE_HOST || "mongodb://localhost:27017/node_demo"
+const dbName = process.env.DATABASE_NAME || "node_demo"
 
 
 //Database
@@ -19,11 +21,11 @@ mongoose
             console.log(`Database: ${dbName}`)
         })
 
-const app = express()
+
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.get('/', catsRouter)
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/', catsRouter)
 
 app.listen(PORT, function () {
     console.log(`listening on ${PORT}`)
