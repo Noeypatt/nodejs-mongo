@@ -2,9 +2,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 require('dotenv').config()
+import catsRouter from './routes/cats'
 
 const PORT = process.env.PORT || 8000
-const dbHost = process.env.DATABASE_HOST || "mongodb://localhost:27017"
+const dbHost = process.env.DATABASE_HOST || "mongodb://localhost:27017/users"
 const dbName = process.env.DATABASE_NAME || "users"
 
 
@@ -22,9 +23,7 @@ const app = express()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.get('/', function (req, res) {
-    res.send("Hello world 🌎")
-})
+app.get('/', catsRouter)
 
 app.listen(PORT, function () {
     console.log(`listening on ${PORT}`)
