@@ -3,14 +3,16 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
+const PORT = process.env.PORT
+
 const app = express()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
-    res.send("Hello")
+    res.send("Hello world 🌎")
 })
 
-app.listen(7700, function () {
-    console.log(`listening on 7700`)
+app.listen(PORT, function () {
+    console.log(`listening on ${PORT}`)
 })
