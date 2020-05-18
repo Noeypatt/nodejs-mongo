@@ -21,3 +21,37 @@ exports.create = function (req, res) {
         })
     })
 }
+
+exports.read = function (req, res) {
+    Cats.find()
+        .exec((err, cats) => {
+            if (err) {
+                return res.json({
+                    error: 'Cats not found'
+                })
+            }
+            res.send(cats)
+        })
+
+}
+
+exports.update = function (req, res) {
+
+    const name = req.params.name
+
+    console.log(name);
+    Cats.findOneAndUpdate(name,
+        { $set: req.body },
+        function (err, cats) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.json({
+                    message: `User updated`
+                })
+            }
+        }
+    )
+
+}

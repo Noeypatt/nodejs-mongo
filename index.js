@@ -12,15 +12,10 @@ const dbName = process.env.DATABASE_NAME || "node_demo"
 
 
 //Database
-mongoose
-    .connect(dbHost,
-        (err, client) => {
-            if (err) return console.log(err)
-
-            console.log(`Connected MongoDB: ${dbHost}`)
-            console.log(`Database: ${dbName}`)
-        })
-
+mongoose.connect(dbHost)
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 app.use(bodyParser.json());
